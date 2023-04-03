@@ -1,0 +1,21 @@
+{
+  "name": "zelda-like-desktop-kaboom-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.js",
+  "scripts": {
+    "electron-start": "electron .",
+    "esbuild-start": "esbuild src/main.js --bundle --outfile=app/main.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^23.2.1",
+    "electron-reloader": "^1.2.3",
+    "esbuild": "^0.17.15"
+  },
+  "dependencies": {
+    "kaboom": "^3000.0.0-beta.2"
+  }
+}
