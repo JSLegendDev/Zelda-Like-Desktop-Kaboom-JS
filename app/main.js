@@ -862,7 +862,7 @@
   var wr = "data:image/png;base64,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";
   var po = "3000.0.0-beta.2";
   var vr = { ArrowLeft: "left", ArrowRight: "right", ArrowUp: "up", ArrowDown: "down", " ": "space" };
-  var go = /* @__PURE__ */ new Set([" ", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Tab"]);
+  var go2 = /* @__PURE__ */ new Set([" ", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Tab"]);
   var br = ["left", "middle", "right", "back", "forward"];
   var yr = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
   var Rt = "topleft";
@@ -1959,7 +1959,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         t && o.mouseState.release(t), f.ev.trigger("mouseRelease", t);
       });
     }, se.keydown = (e) => {
-      go.has(e.key) && e.preventDefault(), f.ev.onOnce("input", () => {
+      go2.has(e.key) && e.preventDefault(), f.ev.onOnce("input", () => {
         let t = vr[e.key] || e.key.toLowerCase();
         t.length === 1 ? (f.ev.trigger("charInput", t), o.charInputted.push(t)) : t === "space" && (f.ev.trigger("charInput", " "), o.charInputted.push(" ")), e.repeat ? (o.keyState.pressRepeat(t), f.ev.trigger("keyPressRepeat", t)) : (o.keyState.press(t), f.ev.trigger("keyPressRepeat", t), f.ev.trigger("keyPress", t));
       });
@@ -3705,14 +3705,81 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       "grass-bl": setTile(0, 32),
       "grass-bm": setTile(16, 32),
       "grass-br": setTile(32, 32),
-      "ground-l": setTile(0, 42),
-      "ground-m": setTile(16, 42),
-      "ground-r": setTile(32, 42)
+      "ground-l": setTile(0, 48),
+      "ground-m": setTile(16, 48),
+      "ground-r": setTile(32, 48),
+      "flower-1": setTile(80, 32),
+      "flower-2": setTile(96, 32)
     });
-    add([sprite("ground-r"), scale(4), pos(center())]);
+  }
+
+  // src/scenes/world.js
+  function world() {
+    const map = [
+      addLevel([
+        "    34444445   ",
+        "3444100000024445",
+        "10001000000200024444444444",
+        "10001000000200020000000000",
+        "10006777777800020000000000",
+        "10009aaaaaab00020000000000",
+        "10000000000000020000000000",
+        "10000000000000020000000000",
+        "10000000000000020000000000",
+        "67777777777777780000000000",
+        "00000000000000000000000000",
+        "00000000000000000000000000",
+        "00000000000000000000000000"
+      ], { tileWidth: 16, tileHeight: 16, tiles: {
+        0: () => [sprite("grass-mm")],
+        1: () => [sprite("grass-ml")],
+        2: () => [sprite("grass-mr")],
+        3: () => [sprite("grass-tl")],
+        4: () => [sprite("grass-tm")],
+        5: () => [sprite("grass-tr")],
+        6: () => [sprite("grass-bl")],
+        7: () => [sprite("grass-bm")],
+        8: () => [sprite("grass-br")],
+        9: () => [sprite("ground-l")],
+        "a": () => [sprite("ground-m")],
+        "b": () => [sprite("ground-r")]
+      } })
+    ];
+    map.forEach((layer) => {
+      layer.use(scale(2));
+      layer.use(pos(200, 200));
+    });
+  }
+
+  // src/debugTools/camTools.js
+  function enableFreeCam() {
+    onKeyDown(() => {
+      if (isKeyDown("left"))
+        camPos(camPos().x - 10, camPos().y);
+      if (isKeyDown("right"))
+        camPos(camPos().x + 10, camPos().y);
+      if (isKeyDown("up"))
+        camPos(camPos().x, camPos().y + 10);
+      if (isKeyDown("down"))
+        camPos(camPos().x, camPos().y - 10);
+    });
+  }
+  function zoomCam() {
+    const scaleFactor = 0.5;
+    onKeyPress("+", () => camScale(camScale().x + scaleFactor, camScale().y + scaleFactor));
+    onKeyPress("-", () => camScale(camScale().x - scaleFactor, camScale().y - scaleFactor));
   }
 
   // src/main.js
   ra({ width: window.innerWidth, height: window.innerHeight });
   assetLoader();
+  var scenes = /* @__PURE__ */ new Map([
+    ["world", () => {
+      world();
+      enableFreeCam();
+      zoomCam();
+    }]
+  ]);
+  scenes.forEach((sceneFunc, sceneKey) => scene(sceneKey, sceneFunc));
+  go("world");
 })();
