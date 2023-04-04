@@ -3690,10 +3690,29 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     return o.canvas.focus(), Ye;
   }, "default");
 
+  // src/assetLoader.js
+  function assetLoader() {
+    function setTile(x, y) {
+      return { x, y, width: 16, height: 16 };
+    }
+    loadSpriteAtlas("./asset.png", {
+      "grass-tl": setTile(0, 0),
+      "grass-tm": setTile(16, 0),
+      "grass-tr": setTile(32, 0),
+      "grass-ml": setTile(0, 16),
+      "grass-mm": setTile(16, 16),
+      "grass-mr": setTile(32, 16),
+      "grass-bl": setTile(0, 32),
+      "grass-bm": setTile(16, 32),
+      "grass-br": setTile(32, 32),
+      "ground-l": setTile(0, 42),
+      "ground-m": setTile(16, 42),
+      "ground-r": setTile(32, 42)
+    });
+    add([sprite("ground-r"), scale(4), pos(center())]);
+  }
+
   // src/main.js
-  ra();
-  var button = add([rect(100, 100), pos(center()), area(), outline(3)]);
-  button.onClick(() => {
-    debug.log("hello");
-  });
+  ra({ width: window.innerWidth, height: window.innerHeight });
+  assetLoader();
 })();

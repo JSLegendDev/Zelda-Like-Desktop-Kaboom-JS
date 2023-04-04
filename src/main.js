@@ -1,9 +1,6 @@
 import kaboom from 'kaboom'
+import assetLoader from './assetLoader'
 
-kaboom()
+kaboom({width: window.innerWidth, height: window.innerHeight })
 
-const button = add([rect(100,100), pos(center()), area(), outline(3)])
-
-button.onClick(() => {
-    debug.log('hello')
-})
+assetLoader()
