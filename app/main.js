@@ -3753,7 +3753,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
 
   // src/debugTools/camTools.js
   function enableFreeCam() {
-    onKeyDown(() => {
+    onKeyDown("shift", () => {
       if (isKeyDown("left"))
         camPos(camPos().x - 10, camPos().y);
       if (isKeyDown("right"))

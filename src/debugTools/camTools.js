@@ -1,5 +1,5 @@
 export function enableFreeCam() {
-    onKeyDown(() => {
+    onKeyDown('shift', () => {
         if (isKeyDown('left')) camPos(camPos().x - 10, camPos().y)
         if (isKeyDown('right')) camPos(camPos().x + 10, camPos().y)
         if (isKeyDown('up')) camPos(camPos().x, camPos().y + 10)
