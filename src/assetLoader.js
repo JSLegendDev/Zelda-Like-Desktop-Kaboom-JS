@@ -18,8 +18,8 @@ export default function assetLoader() {
         'ground-m': setTile(16,48),
         'ground-r': setTile(32,48),
         'flower-1': setTile(80,32),
-        'flower-2': setTile(96,32)
+        'flower-2': setTile(96,32),
+        'tree-1': setTile(80,48),
+        'tree-2': setTile(80,64)
     })
-
-    //add([sprite('flower-2'), scale(4), pos(center())])
 }
