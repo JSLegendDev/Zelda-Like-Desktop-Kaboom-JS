@@ -20,6 +20,18 @@ export default function assetLoader() {
         'flower-1': setTile(80,32),
         'flower-2': setTile(96,32),
         'tree-1': setTile(80,48),
-        'tree-2': setTile(80,64)
+        'tree-2': setTile(80,64),
+        'ladder-t': setTile(384,0),
+        'ladder-m': setTile(384,16),
+        'ladder-b': setTile(384,32),
+        'grass-y-tl': setTile(112,0),
+        'grass-y-tm': setTile(128,0),
+        'grass-y-tr': setTile(144,0),
+        'grass-y-ml': setTile(112,16),
+        'grass-y-mm': setTile(128,16),
+        'grass-y-mr': setTile(144,16),
+        'grass-y-bl': setTile(112,32),
+        'grass-y-bm': setTile(128,32),
+        'grass-y-br': setTile(144,32)
     })
 }

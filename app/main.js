@@ -3711,7 +3711,19 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       "flower-1": setTile(80, 32),
       "flower-2": setTile(96, 32),
       "tree-1": setTile(80, 48),
-      "tree-2": setTile(80, 64)
+      "tree-2": setTile(80, 64),
+      "ladder-t": setTile(384, 0),
+      "ladder-m": setTile(384, 16),
+      "ladder-b": setTile(384, 32),
+      "grass-y-tl": setTile(112, 0),
+      "grass-y-tm": setTile(128, 0),
+      "grass-y-tr": setTile(144, 0),
+      "grass-y-ml": setTile(112, 16),
+      "grass-y-mm": setTile(128, 16),
+      "grass-y-mr": setTile(144, 16),
+      "grass-y-bl": setTile(112, 32),
+      "grass-y-bm": setTile(128, 32),
+      "grass-y-br": setTile(144, 32)
     });
   }
 
@@ -3719,20 +3731,33 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   function world() {
     const map = [
       addLevel([
-        "              34444445              ",
-        "          3444100000024445          ",
-        "344444444410001000000200024444444445",
-        "100000000010001000000200020000000002",
-        "100000000010006777777800020000000002",
-        "100000000010009aaaaaab00020000000002",
-        "100000000010000000000000020000000002",
-        "100000000010000000000000020000000002",
-        "100000000010000000000000020000000002",
-        "100000000067777777777777780000000002",
-        "100000000000000000000000000000000002",
-        "100000000000000000000000000000000002",
-        "100000000000000000000000000000000002",
-        "677777777777777777777777777777777778"
+        "              34444445                ",
+        "          3444100000024445            ",
+        "34444444441000100000020002444444445  ",
+        "100000000010001000000200020000000005  ",
+        "100000000010006777777800020000000002  ",
+        "100000000010009aaaaaab00020000000002  ",
+        "100000000010000000000000020000000002  ",
+        "100000000010000000000000020000000002  ",
+        "100000000010000000000000020000000002  ",
+        "100000000067777777777777780000000002  ",
+        "10000000009aaaaaaaaaaaaaab0000000002  ",
+        "100000000000000000000000000000000002  ",
+        "100000000000000000000000000000000002  ",
+        "677777777777777777777777777777777778  ",
+        "9aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab  ",
+        "9aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab  ",
+        "dcccccccccccccccccccccccccccccccccce  ",
+        "dcccccccccccccccccccccccccccccccccce  ",
+        "dcccccccccccccccccccccccccccccccccce  ",
+        "dcccccccccccccccccccccccccccccccejjk  ",
+        "dccccccccccccccccccccccccccccejjk     ",
+        "dcccccccccccccccccccccccccccce        ",
+        "dcccccccejjjjjjjdcccccccccccccgggggggh",
+        "dcccccejk       idccccccccccccccccccce",
+        "dcccejk          idcccccccccccccccccce",
+        "ijjjj            9ijjjjjjjjjjjjjjjjjjk",
+        "                  9aaaaaaaaaaaaaaaaaab"
       ], { tileWidth: 16, tileHeight: 16, tiles: {
         0: () => [sprite("grass-mm")],
         1: () => [sprite("grass-ml")],
@@ -3745,24 +3770,42 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         8: () => [sprite("grass-br")],
         9: () => [sprite("ground-l")],
         "a": () => [sprite("ground-m")],
-        "b": () => [sprite("ground-r")]
+        "b": () => [sprite("ground-r")],
+        "c": () => [sprite("grass-y-mm")],
+        "d": () => [sprite("grass-y-ml")],
+        "e": () => [sprite("grass-y-mr")],
+        "f": () => [sprite("grass-y-tl")],
+        "g": () => [sprite("grass-y-tm")],
+        "h": () => [sprite("grass-y-tr")],
+        "i": () => [sprite("grass-y-bl")],
+        "j": () => [sprite("grass-y-bm")],
+        "k": () => [sprite("grass-y-br")]
       } }),
       addLevel([
-        "                                    ",
-        "                                    ",
-        "                                    ",
-        "                                    ",
-        "                                    ",
-        "      0                             ",
-        "      1                             ",
-        "  0                                 ",
-        "  1   0                             ",
-        "      1                             ",
-        "                                    ",
-        "                                    "
+        "                                      ",
+        "    0                                 ",
+        "322 1         3                       ",
+        "2 0         0                         ",
+        "3 1         1     4                   ",
+        " 3    0           6                   ",
+        "      1                               ",
+        "0 0                                   ",
+        "1 1    0                              ",
+        "00     1   4                          ",
+        "1100       6                          ",
+        "0011 0                                ",
+        "11   1                                ",
+        "                               4      ",
+        "                               5      ",
+        "                               6      "
       ], { tileWidth: 16, tileHeight: 16, tiles: {
         0: () => [sprite("tree-1")],
-        1: () => [sprite("tree-2")]
+        1: () => [sprite("tree-2")],
+        2: () => [sprite("flower-1")],
+        3: () => [sprite("flower-2")],
+        4: () => [sprite("ladder-t")],
+        5: () => [sprite("ladder-m")],
+        6: () => [sprite("ladder-b")]
       } })
     ];
     map.forEach((layer) => {
@@ -3773,6 +3816,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
 
   // src/debugTools/camTools.js
   function enableFreeCam() {
+    camPos(800, 600);
     onKeyDown("shift", () => {
       if (isKeyDown("left"))
         camPos(camPos().x - 10, camPos().y);
@@ -3786,6 +3830,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   }
   function zoomCam() {
     const scaleFactor = 0.5;
+    camScale(camScale().x - scaleFactor, camScale().y - scaleFactor);
     onKeyPress("+", () => camScale(camScale().x + scaleFactor, camScale().y + scaleFactor));
     onKeyPress("-", () => camScale(camScale().x - scaleFactor, camScale().y - scaleFactor));
   }
