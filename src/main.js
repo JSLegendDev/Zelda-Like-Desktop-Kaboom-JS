@@ -4,7 +4,7 @@ import world from './scenes/world'
 import { enableFreeCam, zoomCam } from './debugTools/camTools'
 
 kaboom({width: window.innerWidth, height: window.innerHeight })
-setBackground(Color.fromHex('88d8f8')) // Alt color : 589ffc
+setBackground(Color.fromHex('88d8f8'))
 assetLoader()
 
 const scenes = new Map([

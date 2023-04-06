@@ -34,6 +34,20 @@ export default function assetLoader() {
         'grass-y-bm': setTile(128,32),
         'grass-y-br': setTile(144,32),
         'small-tree-1': setTile(208,128),
-        'small-tree-2': setTile(208,144)
+        'small-tree-2': setTile(208,144),
+        'player-walk-down': {
+            x: 0,
+            y: 384,
+            width: 64,
+            height: 16,
+            sliceX: 4,
+            sliceY: 1,
+            anims: {
+                'walk': {
+                    from: 0,
+                    to: 3
+                }
+            }
+        }
     })
 }
