@@ -53,8 +53,8 @@ export default function world() {
         }}),
 
         addLevel([
-            '                                      ',
-            '    0                      0          ',
+            '                 02023                ',
+            '    0            1313      0          ',
             '322 1         3            1   0      ',
             '2 0         0                  1      ',
             '3 1         1     4               0   ',
@@ -68,7 +68,16 @@ export default function world() {
             '11   1                                ',
             '                               4      ',
             '                               5      ',
-            '                               6      '
+            '                               6      ',
+            '                                      ',
+            ' 7      7                             ',
+            ' 8      8                             ',
+            '                                      ',
+            '    7       7                         ',
+            '    8       8                         ',
+            ' 7 7                                  ',
+            '7878                                  ',
+            '8 8                                   '
         ],{tileWidth: 16, tileHeight: 16, tiles: {
             0: () => [sprite('tree-1')],
             1: () => [sprite('tree-2')],

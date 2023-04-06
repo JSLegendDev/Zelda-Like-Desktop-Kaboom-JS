@@ -3784,8 +3784,8 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         "k": () => [sprite("grass-y-br")]
       } }),
       addLevel([
-        "                                      ",
-        "    0                      0          ",
+        "                 02023                ",
+        "    0            1313      0          ",
         "322 1         3            1   0      ",
         "2 0         0                  1      ",
         "3 1         1     4               0   ",
@@ -3799,7 +3799,16 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         "11   1                                ",
         "                               4      ",
         "                               5      ",
-        "                               6      "
+        "                               6      ",
+        "                                      ",
+        " 7      7                             ",
+        " 8      8                             ",
+        "                                      ",
+        "    7       7                         ",
+        "    8       8                         ",
+        " 7 7                                  ",
+        "7878                                  ",
+        "8 8                                   "
       ], { tileWidth: 16, tileHeight: 16, tiles: {
         0: () => [sprite("tree-1")],
         1: () => [sprite("tree-2")],
@@ -3841,7 +3850,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
 
   // src/main.js
   ra({ width: window.innerWidth, height: window.innerHeight });
-  setBackground(Color.fromHex("6f6abf"));
+  setBackground(Color.fromHex("88d8f8"));
   assetLoader();
   var scenes = /* @__PURE__ */ new Map([
     ["world", () => {
