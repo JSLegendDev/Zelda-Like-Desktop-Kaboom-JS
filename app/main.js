@@ -3723,7 +3723,9 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       "grass-y-mr": setTile(144, 16),
       "grass-y-bl": setTile(112, 32),
       "grass-y-bm": setTile(128, 32),
-      "grass-y-br": setTile(144, 32)
+      "grass-y-br": setTile(144, 32),
+      "small-tree-1": setTile(208, 128),
+      "small-tree-2": setTile(208, 144)
     });
   }
 
@@ -3783,15 +3785,15 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       } }),
       addLevel([
         "                                      ",
-        "    0                                 ",
-        "322 1         3                       ",
-        "2 0         0                         ",
-        "3 1         1     4                   ",
-        " 3    0           6                   ",
-        "      1                               ",
-        "0 0                                   ",
-        "1 1    0                              ",
-        "00     1   4                          ",
+        "    0                      0          ",
+        "322 1         3            1   0      ",
+        "2 0         0                  1      ",
+        "3 1         1     4               0   ",
+        " 3    0           6               1   ",
+        "      1                   0 0         ",
+        "0 0                       1 1         ",
+        "1 1    0                   0          ",
+        "00     1   4               1          ",
         "1100       6                          ",
         "0011 0                                ",
         "11   1                                ",
@@ -3805,7 +3807,9 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         3: () => [sprite("flower-2")],
         4: () => [sprite("ladder-t")],
         5: () => [sprite("ladder-m")],
-        6: () => [sprite("ladder-b")]
+        6: () => [sprite("ladder-b")],
+        7: () => [sprite("small-tree-1")],
+        8: () => [sprite("small-tree-2")]
       } })
     ];
     map.forEach((layer) => {

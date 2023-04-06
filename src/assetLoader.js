@@ -32,6 +32,8 @@ export default function assetLoader() {
         'grass-y-mr': setTile(144,16),
         'grass-y-bl': setTile(112,32),
         'grass-y-bm': setTile(128,32),
-        'grass-y-br': setTile(144,32)
+        'grass-y-br': setTile(144,32),
+        'small-tree-1': setTile(208,128),
+        'small-tree-2': setTile(208,144)
     })
 }

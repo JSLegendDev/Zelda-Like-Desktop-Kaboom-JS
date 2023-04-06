@@ -49,20 +49,20 @@ export default function world() {
             'h': () => [sprite('grass-y-tr')],
             'i': () => [sprite('grass-y-bl')],
             'j': () => [sprite('grass-y-bm')],
-            'k': () => [sprite('grass-y-br')],
+            'k': () => [sprite('grass-y-br')]
         }}),
 
         addLevel([
             '                                      ',
-            '    0                                 ',
-            '322 1         3                       ',
-            '2 0         0                         ',
-            '3 1         1     4                   ',
-            ' 3    0           6                   ',
-            '      1                               ',
-            '0 0                                   ',
-            '1 1    0                              ',
-            '00     1   4                          ',
+            '    0                      0          ',
+            '322 1         3            1   0      ',
+            '2 0         0                  1      ',
+            '3 1         1     4               0   ',
+            ' 3    0           6               1   ',
+            '      1                   0 0         ',
+            '0 0                       1 1         ',
+            '1 1    0                   0          ',
+            '00     1   4               1          ',
             '1100       6                          ',
             '0011 0                                ',
             '11   1                                ',
@@ -76,7 +76,9 @@ export default function world() {
             3: () => [sprite('flower-2')],
             4: () => [sprite('ladder-t')],
             5: () => [sprite('ladder-m')],
-            6: () => [sprite('ladder-b')] 
+            6: () => [sprite('ladder-b')],
+            7: () => [sprite('small-tree-1')],
+            8: () => [sprite('small-tree-2')] 
         }})
     ]
 
