@@ -92,5 +92,9 @@ export const objectLayerTiles = {
     6: () => [sprite('ladder-b')],
     7: () => [sprite('small-tree-1')],
     8: () => [sprite('small-tree-2')],
-    9: () => [sprite('slime-down'), {npcType: 'slime'}] 
+    9: () => [
+        sprite('slime-down'),
+        state('neutral', ['detected','following']),
+        {npcType: 'slime'}
+    ] 
 }}

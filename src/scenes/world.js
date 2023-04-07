@@ -11,7 +11,32 @@ export default function world() {
         layer.use(pos(200,200))
         for (const tile of layer.children) {
             if (tile.npcType) {
-                if (tile.npcType === 'slime') tile.play('walk')
+                if (tile.npcType === 'slime') {
+                    tile.play('walk')
+
+                    tile.movementDelta = 0
+                    tile.onStateUpdate('detected',  () => {
+                        if (tile.movementDelta > 10) {
+                            tile.enterState('following')
+                            tile.movementDelta = 0
+                            return
+                        }
+                        
+                        tile.movementDelta++
+                        tile.move(-100, 0)
+                    })
+                    tile.onStateUpdate('following',  () => {
+                        if (tile.movementDelta > 10) {
+                            tile.enterState('detected')
+                            tile.movementDelta = 0
+                            return
+                        }
+                        
+                        tile.movementDelta++
+                        tile.move(100, 0)
+                    })
+                    tile.enterState('detected')
+                }
             }
         }
     }

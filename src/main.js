@@ -11,7 +11,7 @@ const scenes = new Map([
     ['world', () => { 
         world()
         enableFreeCam()
-        zoomCam(-1)
+        zoomCam(-0.5)
     }]
 ])
 

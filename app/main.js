@@ -3876,7 +3876,11 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       6: () => [sprite("ladder-b")],
       7: () => [sprite("small-tree-1")],
       8: () => [sprite("small-tree-2")],
-      9: () => [sprite("slime-down"), { npcType: "slime" }]
+      9: () => [
+        sprite("slime-down"),
+        state("neutral", ["detected", "following"]),
+        { npcType: "slime" }
+      ]
     }
   };
 
@@ -3891,8 +3895,29 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       layer.use(pos(200, 200));
       for (const tile of layer.children) {
         if (tile.npcType) {
-          if (tile.npcType === "slime")
+          if (tile.npcType === "slime") {
             tile.play("walk");
+            tile.movementDelta = 0;
+            tile.onStateUpdate("detected", () => {
+              if (tile.movementDelta > 10) {
+                tile.enterState("following");
+                tile.movementDelta = 0;
+                return;
+              }
+              tile.movementDelta++;
+              tile.move(-100, 0);
+            });
+            tile.onStateUpdate("following", () => {
+              if (tile.movementDelta > 10) {
+                tile.enterState("detected");
+                tile.movementDelta = 0;
+                return;
+              }
+              tile.movementDelta++;
+              tile.move(100, 0);
+            });
+            tile.enterState("detected");
+          }
         }
       }
     }
@@ -3986,7 +4011,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     ["world", () => {
       world();
       enableFreeCam();
-      zoomCam(-1);
+      zoomCam(-0.5);
     }]
   ]);
   scenes.forEach((sceneFunc, sceneKey) => scene(sceneKey, sceneFunc));
