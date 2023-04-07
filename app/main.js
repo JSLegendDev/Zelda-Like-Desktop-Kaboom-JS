@@ -3713,6 +3713,24 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         }
       };
     }
+    function setSlimeAnim(name, x, y) {
+      return {
+        x,
+        y,
+        width: 32,
+        height: 16,
+        sliceX: 2,
+        sliceY: 1,
+        anims: {
+          [name]: {
+            from: 0,
+            to: 1,
+            speed: 4,
+            loop: true
+          }
+        }
+      };
+    }
     loadSpriteAtlas("./asset.png", {
       "grass-tl": setTile(0, 0),
       "grass-tm": setTile(16, 0),
@@ -3754,7 +3772,10 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       "player-shield-down": setTile(0, 464),
       "player-shield-right": setTile(16, 464),
       "player-shield-up": setTile(32, 464),
-      "player-shield-left": setTile(48, 464)
+      "player-shield-left": setTile(48, 464),
+      "slime-down": setSlimeAnim("walk", 0, 352),
+      "slime-side": setSlimeAnim("walk", 32, 352),
+      "slime-up": setSlimeAnim("walk", 0, 368)
     });
   }
 
@@ -3816,14 +3837,14 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
   };
   var objectLayer = [
-    "                 02023                ",
+    "                902023                ",
     "    0            1313      0          ",
-    "322 1         3            1   0      ",
-    "2 0         0                  1      ",
-    "3 1         1     4               0   ",
-    " 3    0           6               1   ",
+    "322 1       9 3            1   0      ",
+    "2 0         0                  19    ",
+    "3 1 9       1     4               0   ",
+    " 3    0           6        9      1   ",
     "      1                   0 0         ",
-    "0 0                       1 1         ",
+    "0 0    9                  1 1         ",
     "1 1    0                   0          ",
     "00     1   4               1          ",
     "1100       6                          ",
@@ -3854,7 +3875,8 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       5: () => [sprite("ladder-m")],
       6: () => [sprite("ladder-b")],
       7: () => [sprite("small-tree-1")],
-      8: () => [sprite("small-tree-2")]
+      8: () => [sprite("small-tree-2")],
+      9: () => [sprite("slime-down"), { npcType: "slime" }]
     }
   };
 
@@ -3867,6 +3889,12 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     for (const layer of map) {
       layer.use(scale(2));
       layer.use(pos(200, 200));
+      for (const tile of layer.children) {
+        if (tile.npcType) {
+          if (tile.npcType === "slime")
+            tile.play("walk");
+        }
+      }
     }
     const player = add([
       sprite("player-down"),

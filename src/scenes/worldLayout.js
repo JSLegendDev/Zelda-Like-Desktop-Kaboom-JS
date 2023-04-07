@@ -54,14 +54,14 @@ export const terrainLayerTiles = {
 }}
 
 export const objectLayer = [
-    '                 02023                ',
+    '                902023                ',
     '    0            1313      0          ',
-    '322 1         3            1   0      ',
-    '2 0         0                  1      ',
-    '3 1         1     4               0   ',
-    ' 3    0           6               1   ',
+    '322 1       9 3            1   0      ',
+    '2 0         0                  19    ',
+    '3 1 9       1     4               0   ',
+    ' 3    0           6        9      1   ',
     '      1                   0 0         ',
-    '0 0                       1 1         ',
+    '0 0    9                  1 1         ',
     '1 1    0                   0          ',
     '00     1   4               1          ',
     '1100       6                          ',
@@ -91,5 +91,6 @@ export const objectLayerTiles = {
     5: () => [sprite('ladder-m')],
     6: () => [sprite('ladder-b')],
     7: () => [sprite('small-tree-1')],
-    8: () => [sprite('small-tree-2')] 
+    8: () => [sprite('small-tree-2')],
+    9: () => [sprite('slime-down'), {npcType: 'slime'}] 
 }}

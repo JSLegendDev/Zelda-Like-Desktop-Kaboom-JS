@@ -9,6 +9,11 @@ export default function world() {
     for (const layer of map) {
         layer.use(scale(2))
         layer.use(pos(200,200))
+        for (const tile of layer.children) {
+            if (tile.npcType) {
+                if (tile.npcType === 'slime') tile.play('walk')
+            }
+        }
     }
 
     const player = add([

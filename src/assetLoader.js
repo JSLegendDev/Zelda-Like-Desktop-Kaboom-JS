@@ -4,7 +4,7 @@ export default function assetLoader() {
         return {x, y, width: 16, height: 16}
     }
 
-    function setCharacterAnim(name,x,y) {
+    function setCharacterAnim(name, x, y) {
         return {
             x,
             y,
@@ -18,6 +18,25 @@ export default function assetLoader() {
                     to: 3,
                     loop: true,
                     speed: 4
+                }
+            }
+        }
+    }
+
+    function setSlimeAnim(name, x, y) {
+        return {
+            x, 
+            y, 
+            width: 32,
+            height: 16, 
+            sliceX: 2, 
+            sliceY: 1,
+            anims: {
+                [name]: {
+                    from: 0,
+                    to: 1,
+                    speed: 4,
+                    loop: true
                 }
             }
         }
@@ -65,5 +84,8 @@ export default function assetLoader() {
         'player-shield-right': setTile(16,464),
         'player-shield-up': setTile(32,464),
         'player-shield-left': setTile(48,464),
+        'slime-down': setSlimeAnim('walk', 0, 352),
+        'slime-side': setSlimeAnim('walk', 32, 352),
+        'slime-up': setSlimeAnim('walk', 0, 368)
     })
 }
