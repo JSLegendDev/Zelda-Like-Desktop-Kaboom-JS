@@ -3940,7 +3940,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     ["world", () => {
       world();
       enableFreeCam();
-      zoomCam(0.05);
+      zoomCam(-1);
     }]
   ]);
   scenes.forEach((sceneFunc, sceneKey) => scene(sceneKey, sceneFunc));
