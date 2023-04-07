@@ -17,6 +17,8 @@ function createWindow () {
     resizable: false,
   })
 
+  // uncomment this when the game is finished
+  //win.removeMenu()
   win.loadFile('app/index.html')
 }
 

@@ -12,16 +12,17 @@ export default function world() {
     }
 
     const player = add([
-        sprite('player-shield-up'),
+        sprite('player-down'),
         pos(center()),
         scale(2),
         {
-            speed: 100
+            speed: 100,
+            direction: 'down'
         }
     ])
-    //player.play('attack')
 
     onKeyDown('left', () => {
+        player.direction = 'left'
         player.move(-player.speed,0)
         player.flipX = true
         if (player.curAnim() !== 'walk') {
@@ -31,6 +32,7 @@ export default function world() {
     })
 
     onKeyDown('right', () => {
+        player.direction = 'right'
         player.move(player.speed, 0)
         player.flipX = false
         if (player.curAnim() !== 'walk') {
@@ -40,6 +42,7 @@ export default function world() {
     })
 
     onKeyDown('up', () => {
+        player.direction = 'up'
         player.move(0,-player.speed)
         if (player.curAnim() !== 'walk') {
             player.use(sprite('player-up'))
@@ -48,6 +51,7 @@ export default function world() {
     })
 
     onKeyDown('down', () => {
+        player.direction = 'down'
         player.move(0,player.speed)
         if (player.curAnim() !== 'walk') {
             player.use(sprite('player-down'))
@@ -56,6 +60,21 @@ export default function world() {
     })
 
     onKeyRelease(() => player.stop())
+
+    onKeyPress('space', () => {
+        player.use(sprite('player-attack-' + player.direction))
+    })
+
+    onKeyRelease('space', () => {
+        if (player.direction === 'left') {
+            player.use(sprite('player-side'))
+            player.flipX = true 
+        } else if (player.direction === 'right') {
+            player.use(sprite('player-side'))
+        } else {
+            player.use(sprite('player-' + player.direction))
+        }
+    })
 
     onUpdate(() => {
         camPos(player.pos)
