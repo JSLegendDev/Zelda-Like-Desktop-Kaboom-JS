@@ -4,14 +4,14 @@ import world from './scenes/world'
 import { enableFreeCam, zoomCam } from './debugTools/camTools'
 
 kaboom({width: window.innerWidth, height: window.innerHeight })
-setBackground(Color.fromHex('88d8f8'))
+setBackground(Color.fromHex('6f6abf'))
 assetLoader()
 
 const scenes = new Map([
     ['world', () => { 
         world()
         enableFreeCam()
-        zoomCam() 
+        zoomCam(0.05)
     }]
 ])
 

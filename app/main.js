@@ -3695,6 +3695,24 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     function setTile(x, y) {
       return { x, y, width: 16, height: 16 };
     }
+    function setCharacterAnim(name, x, y) {
+      return {
+        x,
+        y,
+        width: 64,
+        height: 16,
+        sliceX: 4,
+        sliceY: 1,
+        anims: {
+          [name]: {
+            from: 0,
+            to: 3,
+            loop: true,
+            speed: 4
+          }
+        }
+      };
+    }
     loadSpriteAtlas("./asset.png", {
       "grass-tl": setTile(0, 0),
       "grass-tm": setTile(16, 0),
@@ -3726,118 +3744,171 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       "grass-y-br": setTile(144, 32),
       "small-tree-1": setTile(208, 128),
       "small-tree-2": setTile(208, 144),
-      "player-walk-down": {
-        x: 0,
-        y: 384,
-        width: 64,
-        height: 16,
-        sliceX: 4,
-        sliceY: 1,
-        anims: {
-          "walk": {
-            from: 0,
-            to: 3
-          }
-        }
-      }
+      "player-down": setCharacterAnim("walk", 0, 384),
+      "player-side": setCharacterAnim("walk", 0, 400),
+      "player-up": setCharacterAnim("walk", 0, 416),
+      "player-attack-down": setTile(0, 448),
+      "player-attack-right": setTile(16, 448),
+      "player-attack-up": setTile(32, 448),
+      "player-attack-left": setTile(48, 448),
+      "player-shield-down": setTile(0, 464),
+      "player-shield-right": setTile(16, 464),
+      "player-shield-up": setTile(32, 464),
+      "player-shield-left": setTile(48, 464)
     });
   }
+
+  // src/scenes/worldLayout.js
+  var terrainLayer = [
+    "              34444445                ",
+    "          3444100000024445            ",
+    "34444444441000100000020002444444445  ",
+    "100000000010001000000200020000000005  ",
+    "100000000010006777777800020000000002  ",
+    "100000000010009aaaaaab00020000000002  ",
+    "100000000010000000000000020000000002  ",
+    "100000000010000000000000020000000002  ",
+    "100000000010000000000000020000000002  ",
+    "100000000067777777777777780000000002  ",
+    "10000000009aaaaaaaaaaaaaab0000000002  ",
+    "100000000000000000000000000000000002  ",
+    "100000000000000000000000000000000002  ",
+    "677777777777777777777777777777777778  ",
+    "9aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab  ",
+    "9aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab  ",
+    "dcccccccccccccccccccccccccccccccccce  ",
+    "dcccccccccccccccccccccccccccccccccce  ",
+    "dcccccccccccccccccccccccccccccccccce  ",
+    "dcccccccccccccccccccccccccccccccejjk  ",
+    "dccccccccccccccccccccccccccccejjk     ",
+    "dcccccccccccccccccccccccccccce        ",
+    "dcccccccejjjjjjjdcccccccccccccgggggggh",
+    "dcccccejk       idccccccccccccccccccce",
+    "dcccejk          idcccccccccccccccccce",
+    "ijjjj            9ijjjjjjjjjjjjjjjjjjk",
+    "                  9aaaaaaaaaaaaaaaaaab"
+  ];
+  var terrainLayerTiles = {
+    tileWidth: 16,
+    tileHeight: 16,
+    tiles: {
+      0: () => [sprite("grass-mm")],
+      1: () => [sprite("grass-ml")],
+      2: () => [sprite("grass-mr")],
+      3: () => [sprite("grass-tl")],
+      4: () => [sprite("grass-tm")],
+      5: () => [sprite("grass-tr")],
+      6: () => [sprite("grass-bl")],
+      7: () => [sprite("grass-bm")],
+      8: () => [sprite("grass-br")],
+      9: () => [sprite("ground-l")],
+      "a": () => [sprite("ground-m")],
+      "b": () => [sprite("ground-r")],
+      "c": () => [sprite("grass-y-mm")],
+      "d": () => [sprite("grass-y-ml")],
+      "e": () => [sprite("grass-y-mr")],
+      "f": () => [sprite("grass-y-tl")],
+      "g": () => [sprite("grass-y-tm")],
+      "h": () => [sprite("grass-y-tr")],
+      "i": () => [sprite("grass-y-bl")],
+      "j": () => [sprite("grass-y-bm")],
+      "k": () => [sprite("grass-y-br")]
+    }
+  };
+  var objectLayer = [
+    "                 02023                ",
+    "    0            1313      0          ",
+    "322 1         3            1   0      ",
+    "2 0         0                  1      ",
+    "3 1         1     4               0   ",
+    " 3    0           6               1   ",
+    "      1                   0 0         ",
+    "0 0                       1 1         ",
+    "1 1    0                   0          ",
+    "00     1   4               1          ",
+    "1100       6                          ",
+    "0011 0                                ",
+    "11   1                                ",
+    "                               4      ",
+    "                               5      ",
+    "                               6      ",
+    "                                      ",
+    " 7      7                             ",
+    " 8      8                             ",
+    "                                      ",
+    "    7       7                         ",
+    "    8       8                         ",
+    " 7 7                                  ",
+    "7878                                  ",
+    "8 8                                   "
+  ];
+  var objectLayerTiles = {
+    tileWidth: 16,
+    tileHeight: 16,
+    tiles: {
+      0: () => [sprite("tree-1")],
+      1: () => [sprite("tree-2")],
+      2: () => [sprite("flower-1")],
+      3: () => [sprite("flower-2")],
+      4: () => [sprite("ladder-t")],
+      5: () => [sprite("ladder-m")],
+      6: () => [sprite("ladder-b")],
+      7: () => [sprite("small-tree-1")],
+      8: () => [sprite("small-tree-2")]
+    }
+  };
 
   // src/scenes/world.js
   function world() {
     const map = [
-      addLevel([
-        "              34444445                ",
-        "          3444100000024445            ",
-        "34444444441000100000020002444444445  ",
-        "100000000010001000000200020000000005  ",
-        "100000000010006777777800020000000002  ",
-        "100000000010009aaaaaab00020000000002  ",
-        "100000000010000000000000020000000002  ",
-        "100000000010000000000000020000000002  ",
-        "100000000010000000000000020000000002  ",
-        "100000000067777777777777780000000002  ",
-        "10000000009aaaaaaaaaaaaaab0000000002  ",
-        "100000000000000000000000000000000002  ",
-        "100000000000000000000000000000000002  ",
-        "677777777777777777777777777777777778  ",
-        "9aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab  ",
-        "9aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab  ",
-        "dcccccccccccccccccccccccccccccccccce  ",
-        "dcccccccccccccccccccccccccccccccccce  ",
-        "dcccccccccccccccccccccccccccccccccce  ",
-        "dcccccccccccccccccccccccccccccccejjk  ",
-        "dccccccccccccccccccccccccccccejjk     ",
-        "dcccccccccccccccccccccccccccce        ",
-        "dcccccccejjjjjjjdcccccccccccccgggggggh",
-        "dcccccejk       idccccccccccccccccccce",
-        "dcccejk          idcccccccccccccccccce",
-        "ijjjj            9ijjjjjjjjjjjjjjjjjjk",
-        "                  9aaaaaaaaaaaaaaaaaab"
-      ], { tileWidth: 16, tileHeight: 16, tiles: {
-        0: () => [sprite("grass-mm")],
-        1: () => [sprite("grass-ml")],
-        2: () => [sprite("grass-mr")],
-        3: () => [sprite("grass-tl")],
-        4: () => [sprite("grass-tm")],
-        5: () => [sprite("grass-tr")],
-        6: () => [sprite("grass-bl")],
-        7: () => [sprite("grass-bm")],
-        8: () => [sprite("grass-br")],
-        9: () => [sprite("ground-l")],
-        "a": () => [sprite("ground-m")],
-        "b": () => [sprite("ground-r")],
-        "c": () => [sprite("grass-y-mm")],
-        "d": () => [sprite("grass-y-ml")],
-        "e": () => [sprite("grass-y-mr")],
-        "f": () => [sprite("grass-y-tl")],
-        "g": () => [sprite("grass-y-tm")],
-        "h": () => [sprite("grass-y-tr")],
-        "i": () => [sprite("grass-y-bl")],
-        "j": () => [sprite("grass-y-bm")],
-        "k": () => [sprite("grass-y-br")]
-      } }),
-      addLevel([
-        "                 02023                ",
-        "    0            1313      0          ",
-        "322 1         3            1   0      ",
-        "2 0         0                  1      ",
-        "3 1         1     4               0   ",
-        " 3    0           6               1   ",
-        "      1                   0 0         ",
-        "0 0                       1 1         ",
-        "1 1    0                   0          ",
-        "00     1   4               1          ",
-        "1100       6                          ",
-        "0011 0                                ",
-        "11   1                                ",
-        "                               4      ",
-        "                               5      ",
-        "                               6      ",
-        "                                      ",
-        " 7      7                             ",
-        " 8      8                             ",
-        "                                      ",
-        "    7       7                         ",
-        "    8       8                         ",
-        " 7 7                                  ",
-        "7878                                  ",
-        "8 8                                   "
-      ], { tileWidth: 16, tileHeight: 16, tiles: {
-        0: () => [sprite("tree-1")],
-        1: () => [sprite("tree-2")],
-        2: () => [sprite("flower-1")],
-        3: () => [sprite("flower-2")],
-        4: () => [sprite("ladder-t")],
-        5: () => [sprite("ladder-m")],
-        6: () => [sprite("ladder-b")],
-        7: () => [sprite("small-tree-1")],
-        8: () => [sprite("small-tree-2")]
-      } })
+      addLevel(terrainLayer, terrainLayerTiles),
+      addLevel(objectLayer, objectLayerTiles)
     ];
-    map.forEach((layer) => {
+    for (const layer of map) {
       layer.use(scale(2));
       layer.use(pos(200, 200));
+    }
+    const player = add([
+      sprite("player-shield-up"),
+      pos(center()),
+      scale(2),
+      {
+        speed: 100
+      }
+    ]);
+    onKeyDown("left", () => {
+      player.move(-player.speed, 0);
+      player.flipX = true;
+      if (player.curAnim() !== "walk") {
+        player.use(sprite("player-side"));
+        player.play("walk");
+      }
+    });
+    onKeyDown("right", () => {
+      player.move(player.speed, 0);
+      player.flipX = false;
+      if (player.curAnim() !== "walk") {
+        player.use(sprite("player-side"));
+        player.play("walk");
+      }
+    });
+    onKeyDown("up", () => {
+      player.move(0, -player.speed);
+      if (player.curAnim() !== "walk") {
+        player.use(sprite("player-up"));
+        player.play("walk");
+      }
+    });
+    onKeyDown("down", () => {
+      player.move(0, player.speed);
+      if (player.curAnim() !== "walk") {
+        player.use(sprite("player-down"));
+        player.play("walk");
+      }
+    });
+    onKeyRelease(() => player.stop());
+    onUpdate(() => {
+      camPos(player.pos);
     });
   }
 
@@ -3855,8 +3926,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         camPos(camPos().x, camPos().y - 10);
     });
   }
-  function zoomCam() {
-    const scaleFactor = 0.5;
+  function zoomCam(scaleFactor) {
     camScale(camScale().x - scaleFactor, camScale().y - scaleFactor);
     onKeyPress("+", () => camScale(camScale().x + scaleFactor, camScale().y + scaleFactor));
     onKeyPress("-", () => camScale(camScale().x - scaleFactor, camScale().y - scaleFactor));
@@ -3864,13 +3934,13 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
 
   // src/main.js
   ra({ width: window.innerWidth, height: window.innerHeight });
-  setBackground(Color.fromHex("88d8f8"));
+  setBackground(Color.fromHex("6f6abf"));
   assetLoader();
   var scenes = /* @__PURE__ */ new Map([
     ["world", () => {
       world();
       enableFreeCam();
-      zoomCam();
+      zoomCam(0.05);
     }]
   ]);
   scenes.forEach((sceneFunc, sceneKey) => scene(sceneKey, sceneFunc));

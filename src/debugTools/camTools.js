@@ -9,8 +9,7 @@ export function enableFreeCam() {
     })
 }
 
-export function zoomCam() {
-    const scaleFactor = 0.5
+export function zoomCam(scaleFactor) {
     //initial camScale
     camScale(camScale().x - scaleFactor, camScale().y - scaleFactor)
     onKeyPress('+', () => camScale(camScale().x + scaleFactor, camScale().y + scaleFactor))

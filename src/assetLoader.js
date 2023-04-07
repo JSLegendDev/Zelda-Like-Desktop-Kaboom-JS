@@ -4,6 +4,25 @@ export default function assetLoader() {
         return {x, y, width: 16, height: 16}
     }
 
+    function setCharacterAnim(name,x,y) {
+        return {
+            x,
+            y,
+            width: 64,
+            height: 16,
+            sliceX: 4,
+            sliceY: 1,
+            anims: {
+                [name]: {
+                    from: 0,
+                    to: 3,
+                    loop: true,
+                    speed: 4
+                }
+            }
+        }
+    }
+
     loadSpriteAtlas('./asset.png', {
         'grass-tl': setTile(0,0),
         'grass-tm': setTile(16,0),
@@ -35,19 +54,16 @@ export default function assetLoader() {
         'grass-y-br': setTile(144,32),
         'small-tree-1': setTile(208,128),
         'small-tree-2': setTile(208,144),
-        'player-walk-down': {
-            x: 0,
-            y: 384,
-            width: 64,
-            height: 16,
-            sliceX: 4,
-            sliceY: 1,
-            anims: {
-                'walk': {
-                    from: 0,
-                    to: 3
-                }
-            }
-        }
+        'player-down': setCharacterAnim('walk', 0, 384),
+        'player-side': setCharacterAnim('walk', 0, 400),
+        'player-up': setCharacterAnim('walk', 0, 416),
+        'player-attack-down': setTile(0,448),
+        'player-attack-right': setTile(16,448),
+        'player-attack-up': setTile(32,448),
+        'player-attack-left': setTile(48,448),
+        'player-shield-down': setTile(0,464),
+        'player-shield-right': setTile(16,464),
+        'player-shield-up': setTile(32,464),
+        'player-shield-left': setTile(48,464),
     })
 }
